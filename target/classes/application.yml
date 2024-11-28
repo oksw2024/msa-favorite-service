@@ -1,0 +1,30 @@
+server:
+  port: 9006
+
+spring:
+  application:
+    name: msa-favorite-service
+  config:
+    import: optional:configserver:http://localhost:8001
+  datasource:
+    url: jdbc:mysql://localhost:3306/books_db?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&allowMultiQueries=true
+    username: seokju
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+jwt:
+  secret: ohseokju@!ohseokju@!ohseokju@!ohseokju@!ohseokju@!
+  accessTokenExpirationTime: 300000
