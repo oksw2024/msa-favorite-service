@@ -55,15 +55,16 @@ public class FavoriteController {
         if (userId == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
         }
+        log.info("Received Request: {}", request);
 
         Favorite favorite = new Favorite();
         favorite.setUserId(userId);
-        favorite.setBookIsbn(request.getBookIsbn());
-        favorite.setBookTitle(request.getBookTitle());
-        favorite.setAuthor(request.getAuthor());
+        favorite.setBookIsbn(request.getIsbn13());
+        favorite.setBookTitle(request.getBookname());
+        favorite.setAuthor(request.getAuthors());
         favorite.setPublisher(request.getPublisher());
         favorite.setPublicationYear(request.getPublicationYear());
-        favorite.setBookImageUrl(request.getBookImageUrl());
+        favorite.setBookImageUrl(request.getBookImageURL());
         favorite.setCreatedAt(LocalDateTime.now());
 
         log.info("Saving favorite: {}", favorite);
@@ -83,7 +84,7 @@ public class FavoriteController {
         }
 
         log.info("Removing favorite for userId: {}", userId);
-        favoriteService.removeFavorite(userId, request.getBookIsbn());
+        favoriteService.removeFavorite(userId, request.getIsbn13());
         return ResponseEntity.ok().build();
     }
 
