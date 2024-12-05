@@ -1,14 +1,14 @@
 package com.example.msafavoriteservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class FavoriteRequest {
-
-    @JsonProperty("isbn13")
+	@JsonProperty("isbn13")
     private String isbn13;
 
     @JsonProperty("bookname")
@@ -25,5 +25,4 @@ public class FavoriteRequest {
 
     @JsonProperty("bookImageURL")
     private String bookImageURL;
-
 }
