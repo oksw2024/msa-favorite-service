@@ -88,6 +88,20 @@ public class FavoriteController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/remove-all")
+    public ResponseEntity<Void> removeAllFavorites(@RequestHeader("Authorization") String accessToken) {
+        Long userId = tokenService.extractUserId(accessToken);
+        if (userId == null) {
+            throw new RuntimeException("userId not found.");
+        }
+
+        log.info("Removing all favorites for userId: {}", userId);
+        favoriteService.removeAllFavorites(userId);
+        return ResponseEntity.ok().build();
+    }
+
+
+
     @GetMapping("/recommendations")
     public ResponseEntity<?> getRecommendations(@RequestHeader("Authorization") String accessToken) {
         Long userId = tokenService.extractUserId(accessToken);

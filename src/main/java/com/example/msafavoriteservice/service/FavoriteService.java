@@ -47,6 +47,13 @@ public class FavoriteService {
                 .orElseThrow(() -> new RuntimeException("Favorite not found for userId: " + userId + " and bookIsbn: " + bookIsbn));
         favoriteRepository.delete(favorite);
     }
+
+	// 사용자 즐겨찾기 전체삭제
+	public void removeAllFavorites(Long userId) {
+		log.info("Deleting all favorites for userId: {}", userId);
+		favoriteRepository.deleteByUserId(userId);
+	}
+
     public List<Map<String, Object>> getRecommendations(String isbnList) {
         String authKey = "246bc9a1a2ea4ba78b5ada1b16a0ba7e43537ef40b0427f80013629f7b593a86";
         String apiUrl = "http://data4library.kr/api/recommandList?authKey=" + authKey + "&format=json&isbn13=" + isbnList;
